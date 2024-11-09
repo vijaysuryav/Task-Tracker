@@ -1,7 +1,17 @@
 [
   {
     "id": 1,
-    "description": "Buy milk",
-    "status": false
+    "description": "Drink 5 litres of water",
+    "status": "toDo"
+  },
+  {
+    "id": 2,
+    "description": "Go to Gym",
+    "status": "toDo"
+  },
+  {
+    "id": 3,
+    "description": "Sleep for 2 hrs and play basketball",
+    "status": "toDo"
   }
 ]
