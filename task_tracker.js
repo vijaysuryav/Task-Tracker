@@ -9,10 +9,12 @@ if(!fs.existsSync(path)){
 let tasks =JSON.parse(fs.readFileSync(path));
 
 function addTask(taskDescription){
-    const task = {id: tasks.length + 1, description: taskDescription,status:'toDo'}
+    const task = {id: tasks.length + 1, description: taskDescription,status:'toDo',    createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()}
     tasks.push(task);
     fs.writeFileSync(path,JSON.stringify(tasks,null,2));
     console.log(`task added: "${taskDescription}"`);
+
 }
 
 function updateTask(taskID,taskDescription){
@@ -22,6 +24,7 @@ function updateTask(taskID,taskDescription){
         return;
     }
     task.description = taskDescription;
+    task.updatedAt = new Date().toISOString();
     fs.writeFileSync(path, JSON.stringify(tasks, null, 2));
     console.log(`Task with ID: ${taskID} updated to: "${taskDescription}"`);
 
@@ -54,6 +57,7 @@ function mark_completed(taskID){
     const task = tasks.find(t => t.id == parseInt(taskID,10));
     if(task){
         task.status = "completed";
+        fs.writeFileSync(path, JSON.stringify(tasks, null, 2));
         console.log(`Task with ID: ${taskID} updated as: completed`);
     }else{
         console.log("Task with id does not exist");

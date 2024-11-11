@@ -1,17 +1,23 @@
 [
   {
     "id": 1,
-    "description": "Drink 5 litres of water",
-    "status": "toDo"
+    "description": "Buy water",
+    "status": "completed",
+    "createdAt": "2024-11-11T03:28:05.618Z",
+    "updatedAt": "2024-11-11T03:28:05.626Z"
   },
   {
     "id": 2,
-    "description": "Go to Gym",
-    "status": "in-progress"
+    "description": "Code a problem",
+    "status": "in-progress",
+    "createdAt": "2024-11-11T03:28:17.193Z",
+    "updatedAt": "2024-11-11T03:28:17.194Z"
   },
   {
     "id": 3,
-    "description": "Sleep for 2 hrs and play basketball",
-    "status": "toDo"
+    "description": "Sleep on time",
+    "status": "toDo",
+    "createdAt": "2024-11-11T03:28:24.793Z",
+    "updatedAt": "2024-11-11T03:28:24.794Z"
   }
 ]
