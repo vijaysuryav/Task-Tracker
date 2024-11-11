@@ -39,6 +39,46 @@ function deleteTask(taskID){
     }
 }
 
+function mark_in_progress(taskID){
+    const task = tasks.find(t => t.id == parseInt(taskID,10));
+    if(task){
+        task.status = "in-progress";
+        fs.writeFileSync(path, JSON.stringify(tasks, null, 2));
+        console.log(`Task with ID: ${taskID} updated as: in-progress`);
+    }else{
+        console.log("Task with id does not exist");
+    } 
+}
+
+function mark_completed(taskID){
+    const task = tasks.find(t => t.id == parseInt(taskID,10));
+    if(task){
+        task.status = "completed";
+        console.log(`Task with ID: ${taskID} updated as: completed`);
+    }else{
+        console.log("Task with id does not exist");
+    } 
+}
+
+function listTasks(status = null) {
+    let filteredTasks;
+    if (status) {
+        filteredTasks = tasks.filter(task => task.status === status);
+        console.log(`Tasks with status "${status}":`);
+    } else {
+        filteredTasks = tasks;
+        console.log("All tasks:");
+    }
+
+    if (filteredTasks.length === 0) {
+        console.log("No tasks found.");
+    } else {
+        filteredTasks.forEach(task => {
+            console.log(`ID: ${task.id}, Description: "${task.description}", Status: ${task.status}`);
+        });
+    }
+}
+
 
 const [command, ...taskArgs] = process.argv.slice(2);
 
@@ -70,6 +110,31 @@ else if (command == 'delete'){
         deleteTask(taskID);
     }else{
         console.log("Please enter a task ID");
+    }
+}
+else if(command =='mark-in-progress'){
+    const taskID = taskArgs[0];
+    if(taskID){
+        mark_in_progress(taskID);
+    }else{
+        console.log("please enter task ID")
+    }
+}
+else if (command == 'mark-completed'){
+    const taskID = taskArgs[0];
+    if(taskID){
+        mark_completed(taskID);
+    }else{
+        console.log("please enter task ID")
+    }
+}else if (command === 'list') {
+    const status = taskArgs[0];
+    if (status && ["toDo", "in-progress", "completed"].includes(status)) {
+        listTasks(status);
+    } else if (!status) {
+        listTasks();
+    } else {
+        console.log("Invalid status. Use 'toDo', 'in-progress', or 'completed'.");
     }
 }
 else{
